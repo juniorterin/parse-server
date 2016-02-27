@@ -1,8 +1,8 @@
-var ExportAdapter = require('../src/ExportAdapter');
+var DatabaseController = require('../src/Controllers/DatabaseController');
 
-describe('ExportAdapter', () => {
+describe('DatabaseController', () => {
   it('can be constructed', (done) => {
-    var database = new ExportAdapter('mongodb://localhost:27017/test',
+    var database = new DatabaseController('mongodb://localhost:27017/test',
     	{
     		collectionPrefix: 'test_'
     	});
