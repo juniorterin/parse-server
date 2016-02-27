@@ -23,6 +23,25 @@ export class MongoStorageAdapter {
     });
     return this.connectionPromise;
   }
+
+  collection(name: string) {
+    return this.connect().then(() => {
+      return this.database.collection(name);
+    });
+  }
+
+  collectionsContaining(match: string) {
+    return this.connect().then(() => {
+      return this.database.collections();
+    }).then(collections => {
+      return collections.filter(collection => {
+        if (collection.namespace.match(/\.system\./)) {
+          return false;
+        }
+        return (collection.collectionName.indexOf(match) == 0);
+      });
+    });
+  }
 }
 
 export default MongoStorageAdapter;
